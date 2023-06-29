@@ -9,6 +9,12 @@ from .models import Question, Choice
 
 @login_required()
 def index(request):
+    """Starting function of app
+    :Question Class [latest_question_list]: list of questions returned from DB 
+    ...
+    :return: poll.html
+    :rtype: http response
+"""
     latest_question_list = Question.objects.order_by("-pub_date")[:5]
     context = {"latest_question_list": latest_question_list}
     return render(request, "polls/poll.html", context)
