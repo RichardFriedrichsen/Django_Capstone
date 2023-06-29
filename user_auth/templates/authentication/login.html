@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'login_page.css' %}"
+    />
+    <title>Login Page</title>
+  </head>
+  <body>
+    {% include 'polls/navbar.html' %}
+    <div class="row">
+      <aside class="col-5"></aside>
+      <main class="col-2 card">
+        <div class="row">
+          <div class="col-12 card-title"><h2>Login</h2></div>
+        </div>
+
+        
+        <form action="{% url 'user_auth:authenticate_user' %}" method="post">
+          {% csrf_token %}
+          <label>Username:</label>
+          <input type="text" name="username" placeholder="User" required />
+
+          <label>Password:</label>
+          <div class="row">
+            <div class="col-12">
+              <input type="password" name="password" required />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 align-right top-margin">
+              <input type="submit" value="Login" />
+            </div>
+            <div class="col-12 register"><a href="{% url 'user_auth:register_user'%}">Register here</a></div>
+          </div>
+        </form>
+      </main>
+      <aside class="col-5"></aside>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="{% static 'results.css' %}" />
+    <title>Results</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    {% include 'polls/navbar.html' %}
+    <!-- End Navbar-->
+    <!-- ROW 1 -->
+    <section class="row">
+      <aside class="col-4"></aside>
+      <h2 class="col-4">Results</h2>
+      <aside class="col-4"></aside>
+    </section>
+    <!-- End ROW 1 -->
+    <!-- ROW 2 -->
+    <div class="row">
+      <aside class="col-4"></aside>
+      <main class="col-4">
+        {{ question.question_text }} {% for choice in question.choice_set.all %}
+        <div class="row">
+          <div class="col-6 grey-border">{{ choice.choice_text }}</div>
+          <div class="col-6 grey-border">
+            {{ choice.votes}} vote{{choice.votes|pluralize}}
+          </div>
+        </div>
+        {% endfor %}
+        <div class="row">
+          <div type="button" class="col-12 grey-border">
+            <a href="{% url 'polls:detail' question.id %}"> Vote again? </a>
+          </div>
+        </div>
+      </main>
+      <aside class="col-4"></aside>
+    </div>
+    <!-- End ROW 2 -->
+  </body>
+</html>

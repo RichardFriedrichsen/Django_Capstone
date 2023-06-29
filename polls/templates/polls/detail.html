@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="{% static 'detail.css' %}" />
+    <title>Results</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    {% include 'polls/navbar.html' %}
+    <!-- End Navbar-->
+
+    <!-- ROW 1 -->
+    <section class="row">
+      <aside class="col-4"></aside>
+      <h2 class="col-4">Vote</h2>
+      <aside class="col-4"></aside>
+    </section>
+    <!-- End ROW 1 -->
+
+    <!-- Start Form-->
+    <div class="row">
+      <!-- left column -->
+      <aside class="col-4"></aside>
+      <!-- middle column -->
+      <main class="col-4">
+        <form
+          class="card bg-primary"
+          action="{% url 'polls:vote' question.id %}"
+          method="post"
+        >
+          {% csrf_token %}
+
+          <div class="card-header">{{question.question_text}}</div>
+          <ul class="list-group list-group-flush">
+            {% for choice in question.choice_set.all %}
+            <li class="list-group-item">
+              <input
+                type="radio"
+                name="choice"
+                id="choice {{
+        forloop.counter
+        }}"
+                value="{{ choice.id }}"
+              />{{ choice.choice_text }}
+            </li>
+            {% endfor %}
+            <input type="submit" value="Vote" />
+          </ul>
+        </form>
+      </main>
+      <!-- right column -->
+      <aside class="col-4"></aside>
+    </div>
+    <!-- End Form-->
+  </body>
+</html>

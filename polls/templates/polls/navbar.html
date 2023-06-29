@@ -1,0 +1,12 @@
+
+
+  <!-- Navbar start -->
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <a class="navbar-brand" href="{% url 'polls:index'%}">Polls App</a>
+
+  
+   {% if user.is_authenticated %}
+   <h6 class="ml-auto">Welcome, {{ user.username }}</h6>
+  <a class="btn btn-dark ml-auto" href="{% url 'user_auth:logout_user' %}" >Logout</a>
+    {% endif %}
+</nav>
