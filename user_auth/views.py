@@ -72,6 +72,13 @@ def authenticate_user(request):
 )
 
 def show_user(request):
+    """The function is used to show the user credentials. It executes with path: 'show_user/'.
+    :param request: The http request Object that is parsed.
+    :type request: HttpRequest
+    ...
+    :return: An HTML template authentication/user.html and a context dictionary for username and password
+    :rtype: HTML
+    """
     print(request.user.username)
     return render(request, 'authentication/user.html', {
         "username": request.user.username,
