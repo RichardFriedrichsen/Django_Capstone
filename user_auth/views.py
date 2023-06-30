@@ -38,12 +38,26 @@ def user_login(request):
     return render(request, "authentication/login.html", context)
 
 def user_logout(request):
+    """The function logs the user out of the app. It executes with path: 'logout_user/'.
+    :param request: The http request Object that is parsed.
+    :type request: HttpRequest
+    ...
+    :return: The reverse path of 'user_auth:login' absolute path 'user_auth/'
+    :rtype: HttpResponseRedirect
+    """
     logout(request)
     messages.success(request,"You have been logged out!")
     return HttpResponseRedirect(reverse('user_auth:login'))
     
 
 def authenticate_user(request):
+    """The function is used to authenticate user credentials. It executes with path: 'user_auth/authenticate_user/'.
+    :param request: The http request Object that is parsed.
+    :type request: HttpRequest
+    ...
+    :return: If user authentication successful returns reverse path 'polls:index' if not returns the user to 'user_auth:login'
+    :rtype: HttpResponseRedirect
+    """
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
