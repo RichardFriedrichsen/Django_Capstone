@@ -10,6 +10,13 @@ from .forms import RegisterUserForm
 
 
 def register_user(request):
+    """The function takes form data to register a User in the app. It executes with path: 'register_user/'.
+    :param request: The http request Object that is parsed.
+    :type request: HttpRequest
+    ...
+    :return: If form/POST is valid it returns redirects to 'polls:index', if not it returns template "authentication/register.html" with an empty form.
+    :rtype: HttpResponse
+    """
     if request.method == "POST":
         form = RegisterUserForm(request.POST)
         if form.is_valid():
