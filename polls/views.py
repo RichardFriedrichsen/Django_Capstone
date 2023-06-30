@@ -41,11 +41,38 @@ def detail(request, question_id):
 
 @login_required()
 def results(request, question_id):
+    """Function that executes with path: '<int:question_id>/results/>'
+    
+    :param request: The http request Object that is parsed.
+    :type request: HttpRequest
+
+    :param question_id: The ID of the question.
+    :type question_id: int
+    
+    :raises Http404: If the question with the given ID does not exist.
+     
+    :return: The rendered template "polls/results.html" with the context containing the results of the poll.
+    :rtype: HttpResponse
+    """
     question = get_object_or_404(Question, pk=question_id)
     return render(request, "polls/results.html", {"question": question})
 
 @login_required()
 def vote(request, question_id):
+    """Function that executes with path: '<int:question_id>/vote/>'. If successful saves choice of poll in DB.
+    
+    :param request: The http request Object that is parsed.
+    :type request: HttpRequest
+
+    :param question_id: The ID of the question.
+    :type question_id: int
+    
+    :raises Http404: If the question with the given ID does not exist.
+    :raises KeyError: If the question with the given ID does not exist.
+     
+    :return: The rendered template "polls/results.html" with the context containing the results of the poll.
+    :rtype: HttpResponseRedirect
+    """
     question = get_object_or_404(Question, pk=question_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST["choice"])
