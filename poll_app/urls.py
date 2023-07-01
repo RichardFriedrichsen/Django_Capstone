@@ -16,12 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("polls/", include("polls.urls")),
-    path("user_auth/", include("django.contrib.auth.urls")),
-    path("user_auth/", include("user_auth.urls")),
-     path("", lambda request: redirect('user_auth/'), name='root'),
-
+    # path("user_auth/", include("django.contrib.auth.urls")),
+    # path("user_auth/", include("user_auth.urls")),
+    path("", include("django.contrib.auth.urls")),
+    path("", include("user_auth.urls")),
+    # path("", lambda request: redirect('user_auth/'), name='root'),
+    # path("", RedirectView.as_view(url='user_auth/'), name='root'),
 ]
