@@ -6,6 +6,12 @@ __pycache__
 db.sqlite3
 media
 
+# Secrets
+secret.txt
+
+# Task requirements
+capstone.txt 
+
 # Backup files # 
 *.bak 
 
